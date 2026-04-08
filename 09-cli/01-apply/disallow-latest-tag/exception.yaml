@@ -1,0 +1,16 @@
+apiVersion: kyverno.io/v2
+kind: PolicyException
+metadata:
+  name: exclude-busybox-pod
+spec:
+  exceptions:
+    - policyName: disallow-latest-tag
+      ruleNames:
+        - no-latest-tag
+  match:
+    any:
+      - resources:
+          kinds:
+            - Pod
+          names:
+            - "busybox-pod"
